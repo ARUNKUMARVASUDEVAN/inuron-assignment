@@ -1,0 +1,99 @@
+1. What does RGBA stand for?
+ans:
+Red Green Blue Alpha used for digital imaging and computer graphics to represent colors
+
+2. From the Pillow module, how do you get the RGBA value of any images?
+
+Ans:
+
+To get the RGBA value of an image using the Pillow module in Python,  getpixel() method of the Image class.
+
+3. What is a box tuple, and how does it work?
+
+Ans:
+
+In the context of the Pillow module in Python, a "box tuple" refers to a tuple of four integers that represents a rectangular region in an image. The four integers are the x-coordinate of the left edge of the rectangle, the y-coordinate of the top edge of the rectangle, the x-coordinate of the right edge of the rectangle, and the y-coordinate of the bottom edge of the rectangle. The box tuple is typically denoted as (left, top, right, bottom)
+
+4. Use your image and load in notebook then, How can you find out the width and height of an Image object?
+
+Ans:
+
+To find out the width and height of an Image object in Python using the Pillow module, you can use the size attribute of the Image object
+
+img = Image.open("image.png")
+
+
+width, height = img.size
+
+
+print("Image width: ", width)
+print("Image height:", height)
+
+5. What method would you call to get Image object for a 100×100 image, excluding the lower-left quarter of it?
+
+Ans:
+
+To get an Image object for a 100×100 image, excluding the lower-left quarter of it using the Pillow module in Python, you can use the crop() method of the Image class
+
+from PIL import Image
+
+# Open the image
+img = Image.open("image.png")
+
+# Define the region to crop (excluding the lower-left quarter)
+box = (0, 0, 50, 100)
+
+# Crop the image to the specified region
+cropped_img = img.crop(box)
+
+# Save the cropped image
+cropped_img.save("cropped_image.png")
+
+the code above, we first open the image using the Image.open() method. We then define a box tuple (0, 0, 50, 100) that represents a rectangular region in the image, excluding the lower-left quarter. We use this box tuple as an argument to the crop() method of the Image class, which returns a new Image object containing the cropped region. Finally, we save the cropped image to a file using the save() method. The crop() method takes a box tuple as its argument, where the first two values of the tuple represent the (x, y) coordinates of the top-left corner of the region to be cropped, and the last two values represent the (x, y) coordinates of the bottom-right corner of the region to be cropped. In this example, we're excluding the lower-left quarter of the image, so we're setting the left coordinate to 0, the top coordinate to 0, the right coordinate to 50 (which is half of the image width), and the bottom coordinate to 100 (which is the full image height).
+
+
+6. After making changes to an Image object, how could you save it as an image file?
+
+Ans:
+To save an Image object as an image file after making changes to it using the Pillow module in Python, you can use the save() method of the Image class.
+
+from PIL import Image
+img = Image.open("image.png")
+img.save("modified_image.png")
+
+In the code above, we first open the image using the Image.open() method. We then make some modifications to the image (e.g. resize, crop, rotate, etc.). Finally, we save the modified image to a file using the save() method. The save() method takes a filename as its argument, which specifies the path and filename to save the image to. The format of the image file is inferred from the file extension of the filename. For example, if the filename ends in ".png", the image will be saved as a PNG file, and if the filename ends in ".jpg" or ".jpeg", the image will be saved as a JPEG file. If you want to save the image in a specific format, you can pass the format parameter to the save() method, like this:
+
+img.save("modified_image.jpg", format="JPEG")
+
+
+
+
+7. What module contains Pillow’s shape-drawing code?
+
+
+Ans:
+Pillow's shape-drawing code is contained in the ImageDraw module. The ImageDraw module provides a class with the same name that can be used to draw shapes such as lines, rectangles, circles, and polygons on an Image object. To use the ImageDraw module, you first need to create an ImageDraw object by calling the ImageDraw.Draw() method and passing in the Image object you want to draw on.
+
+from PIL import Image, ImageDraw
+
+# Open the image
+img = Image.open("image.png")
+
+# Create an ImageDraw object
+draw = ImageDraw.Draw(img)
+
+# Draw a line
+draw.line((0, 0, 100, 100), fill="red", width=2)
+
+# Draw a rectangle
+draw.rectangle((50, 50, 150, 150), fill="blue", outline="green")
+
+# Draw a circle
+draw.ellipse((200, 200, 300, 300), fill="yellow", outline="purple")
+
+# Save the modified image
+img.save("modified_image.png")
+
+In this example, we first open an image file using the Image.open() method. We then create an ImageDraw object by calling the ImageDraw.Draw() method and passing in the Image object we want to draw on. We can then use the various drawing methods of the ImageDraw class to draw shapes on the image. In this example, we're drawing a red line from (0, 0) to (100, 100), a blue rectangle with a green outline from (50, 50) to (150, 150), and a yellow circle with a purple outline in a bounding box from (200, 200) to (300, 300). Finally, we save the modified image to a file using the save() method of the Image object.
+
+
